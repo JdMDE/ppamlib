@@ -1,0 +1,77 @@
+\hypertarget{silhouette_8h}{}\doxysection{src/headers/silhouette.h File Reference}
+\label{silhouette_8h}\index{src/headers/silhouette.h@{src/headers/silhouette.h}}
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$jmatrixlib/fullmatrix.\+h$>$}\newline
+{\ttfamily \#include $<$jmatrixlib/sparsematrix.\+h$>$}\newline
+{\ttfamily \#include $<$jmatrixlib/symmetricmatrix.\+h$>$}\newline
+{\ttfamily \#include $<$jmatrixlib/memhelper.\+h$>$}\newline
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef double \mbox{\hyperlink{silhouette_8h_a0a66123d332624dfd3e30a689d11b25f}{siltype}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename disttype $>$ }\\std\+::vector$<$ \mbox{\hyperlink{silhouette_8h_a0a66123d332624dfd3e30a689d11b25f}{siltype}} $>$ \mbox{\hyperlink{silhouette_8h_aadf89af193cfabf242aafa6723c44925}{Calculate\+Silhouette}} (std\+::vector$<$ indextype $>$ cl, Symmetric\+Matrix$<$ disttype $>$ \&D, unsigned int nt)
+\item 
+{\footnotesize template$<$typename disttype $>$ }\\\mbox{\hyperlink{silhouette_8h_a0a66123d332624dfd3e30a689d11b25f}{siltype}} \mbox{\hyperlink{silhouette_8h_a15d7d176dd60ffd81d727b3bb2e4212b}{Calculate\+Mean\+Silhouette}} (std\+::vector$<$ indextype $>$ cl, indextype nmed, Symmetric\+Matrix$<$ disttype $>$ $\ast$D, unsigned int nt)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{silhouette_8h_a0a66123d332624dfd3e30a689d11b25f}\label{silhouette_8h_a0a66123d332624dfd3e30a689d11b25f}} 
+\index{silhouette.h@{silhouette.h}!siltype@{siltype}}
+\index{siltype@{siltype}!silhouette.h@{silhouette.h}}
+\doxysubsubsection{\texorpdfstring{siltype}{siltype}}
+{\footnotesize\ttfamily typedef double \mbox{\hyperlink{silhouette_8h_a0a66123d332624dfd3e30a689d11b25f}{siltype}}}
+
+The values of the silhouette will be stored as double. Since its number is always linear with the number of points, this should not increase too much memory usage and is simpler. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{silhouette_8h_a15d7d176dd60ffd81d727b3bb2e4212b}\label{silhouette_8h_a15d7d176dd60ffd81d727b3bb2e4212b}} 
+\index{silhouette.h@{silhouette.h}!CalculateMeanSilhouette@{CalculateMeanSilhouette}}
+\index{CalculateMeanSilhouette@{CalculateMeanSilhouette}!silhouette.h@{silhouette.h}}
+\doxysubsubsection{\texorpdfstring{CalculateMeanSilhouette()}{CalculateMeanSilhouette()}}
+{\footnotesize\ttfamily template$<$typename disttype $>$ \\
+\mbox{\hyperlink{silhouette_8h_a0a66123d332624dfd3e30a689d11b25f}{siltype}} Calculate\+Mean\+Silhouette (\begin{DoxyParamCaption}\item[{std\+::vector$<$ indextype $>$}]{cl,  }\item[{indextype}]{nmed,  }\item[{Symmetric\+Matrix$<$ disttype $>$ $\ast$}]{D,  }\item[{unsigned int}]{nt }\end{DoxyParamCaption})}
+
+Function to calculate in parallel the mean values of the silhouette of all points after a clustering has been done~\newline
+disttype is the value type used to represent distances in the dissimilarity matrix, either float or double~\newline
+siltype is the value type used to store the silhouette, here defined as double
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em cl} & A vector with the class each point belong to, as a number in \mbox{[}0..(num\+\_\+classes-\/1)\mbox{]}. Its length must be the number of points, which is the number of rows (and of columns) of the dissimilarity matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em D} & A reference to the dissimilariry matrix, as a Symmetric\+Matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em nt} & Number of threads to be opened. Normally, use the result of function Choose\+Num\+Threads(\+AS\+\_\+\+MANY\+\_\+\+AS\+\_\+\+POSSIBLE) to get this parameter\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The mean value of the silhouette of all points. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{silhouette_8h_aadf89af193cfabf242aafa6723c44925}\label{silhouette_8h_aadf89af193cfabf242aafa6723c44925}} 
+\index{silhouette.h@{silhouette.h}!CalculateSilhouette@{CalculateSilhouette}}
+\index{CalculateSilhouette@{CalculateSilhouette}!silhouette.h@{silhouette.h}}
+\doxysubsubsection{\texorpdfstring{CalculateSilhouette()}{CalculateSilhouette()}}
+{\footnotesize\ttfamily template$<$typename disttype $>$ \\
+std\+::vector$<$\mbox{\hyperlink{silhouette_8h_a0a66123d332624dfd3e30a689d11b25f}{siltype}}$>$ Calculate\+Silhouette (\begin{DoxyParamCaption}\item[{std\+::vector$<$ indextype $>$}]{cl,  }\item[{Symmetric\+Matrix$<$ disttype $>$ \&}]{D,  }\item[{unsigned int}]{nt }\end{DoxyParamCaption})}
+
+Function to calculate in parallel the silhouette of each point after a clustering has been done~\newline
+disttype is the value type used to represent distances in the dissimilarity matrix, either float or double~\newline
+siltype is the value type used to store the silhouette, here defined as double
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em cl} & A vector with the class each point belong to, as a number in \mbox{[}0..(num\+\_\+classes-\/1)\mbox{]}. Its length must be the number of points, which is the number of rows (and of columns) of the dissimilarity matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em D} & A reference to the dissimilariry matrix, as a Symmetric\+Matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em nt} & Number of threads to be opened. Normally, use the result of function Choose\+Num\+Threads(\+AS\+\_\+\+MANY\+\_\+\+AS\+\_\+\+POSSIBLE) to get this parameter\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector with as many components as points containing the silhouette value of each one. Order of points is as in the dissimilarity matrix. 
+\end{DoxyReturn}

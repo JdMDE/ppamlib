@@ -1,0 +1,85 @@
+\hypertarget{parpam_8cpp}{}\doxysection{src/examples/parpam.cpp File Reference}
+\label{parpam_8cpp}\index{src/examples/parpam.cpp@{src/examples/parpam.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include \char`\"{}../headers/debugpar\+\_\+ppam.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../headers/threadhelper.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../headers/fastpam.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{parpam_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxysubsubsection*{parpam}
+
+See program use in the documention to \mbox{\hyperlink{parpam_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main()}} below~\newline
+ ~\newline
+ NOTE\+: The includes in this source file are for compilation of this program as an example together with the library,~\newline
+ before the library itself is installed. Once you have installed the library (assuming headers are in~\newline
+ /usr/local/include, lib is in /usr/local/lib or in other place included in your compiler search path)~\newline
+ you should substitute this by~\newline
+~\newline
+ \#include $<$parallelpam/debugpar\+\_\+ppam.\+h$>$ etc...~\newline
+~\newline
+ and compile with something like
+
+g++ -\/Wall \mbox{\hyperlink{parpam_8cpp}{parpam.\+cpp}} -\/o parpam -\/ljmatrix -\/lppam 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{parpam_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{parpam_8cpp_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{parpam.cpp@{parpam.cpp}!main@{main}}
+\index{main@{main}!parpam.cpp@{parpam.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\doxysubsubsection*{parpam}
+
+A program to apply the Partitionin Around Medoids (PAM) clustering method to a set of individuals whose dissimilarity matrix is given, in parallel. It implements the FASTPAM1 algorithm described in~\newline
+~\newline
+Schubert, E. and Rousseeuw, P.\+J.\+: \char`\"{}\+Fast and eager k-\/medoids clustering\+: O(k) runtime improvement of the PAM, CLARA, and CLARANS algorithms.\char`\"{}~\newline
+Information Systems, vol. 101, p. 101804, 2021.~\newline
+doi\+: \href{https://doi.org/10.1016/j.is.2021.101804}{\texttt{ https\+://doi.\+org/10.\+1016/j.\+is.\+2021.\+101804}}~\newline
+~\newline
+See documentation of class \mbox{\hyperlink{classFastPAM}{Fast\+PAM}} for more information~\newline
+ The program must be called as
+
+parpam ds\+\_\+file k \mbox{[}-\/imet method (medoids\+\_\+file)\mbox{]} \mbox{[}-\/omet method\mbox{]} \mbox{[}-\/mit max\+\_\+iter\mbox{]} \mbox{[}-\/nt numthreads\mbox{]} -\/o root\+\_\+file\+\_\+name
+
+where~\newline
+~\newline
+{\bfseries{ds\+\_\+file}}\+: File with the dissimilarity matrix in jmatrix format.~\newline
+ It must be a symmetric matrix of float or double with dimension (n x n). You can use program \mbox{\hyperlink{pardis_8cpp}{pardis.\+cpp}} to generate it.~\newline
+ This argument is compulsory and must be the first one after the program name.~\newline
+~\newline
+{\bfseries{k}}\+: Requested number of medoids (possitive integer number, k$<$n).~\newline
+ This argument is compulsory and must be the second one after the program name.~\newline
+~\newline
+{\bfseries{imet}}\+: Initialization method, which must be one of the strings \textquotesingle{}BUILD\textquotesingle{}, \textquotesingle{}LAB\textquotesingle{} or \textquotesingle{}PREV\textquotesingle{}~\newline
+ If you use PREV the file with the initial medoids must be given, too, which must be~\newline
+ a jmatrix Full\+Matrix of unsiged int with dimension (n x 1) (as returned by another call to this program)~\newline
+ If you use BUILD or LAB no initial medoids file should be provided. Default value\+: BUILD.~\newline
+~\newline
+{\bfseries{omet}}\+: Optimization method, which must be one of the strings \textquotesingle{}FASTPAM1\textquotesingle{} or \textquotesingle{}TWOBRANCH\textquotesingle{}. Default value\+: FASTPAM1~\newline
+~\newline
+{\bfseries{max\+\_\+iter}}\+: Maximum number of iterations. Set it to 0 to do only the initialization phase (with BUILD or LAB method).~\newline
+ Default value\+: the value of constant MAX\+\_\+\+ITER defined in \mbox{\hyperlink{fastpam_8h}{fastpam.\+h}}~\newline
+~\newline
+{\bfseries{numthreads}}\+: Requested number of threads.~\newline
+ Setting it to 0 will make the program to choose according to the number of processors/cores of your machine (default value).~\newline
+ Setting to -\/1 forces serial implementation (no threads)~\newline
+~\newline
+{\bfseries{root\+\_\+fname}}\+: A string used to build root\+\_\+fname\+\_\+med.\+bin and root\+\_\+fname\+\_\+clas.\+bin.~\newline
+ This argument is compulsory and must be the last one.~\newline
+~\newline
+Calling this program as {\bfseries{parpamd}} turns on debugging; calling it as {\bfseries{parpamdd}} turns on the jmatrix library debugging, too.~\newline
+The output files will contain jmatrix vectors of final medoids and classification, respectively.~\newline
+Both are Full\+Matrix of indextype (unsigned int) with dimensions (k x 1) for med and (n x 1) for clas.~\newline
+The first one contains the indices of the found medoids as row indices of the dissimilarity matrix, from 0 (i.\+e.\+: integers in range \mbox{[}0..n-\/1\mbox{]}).~\newline
+The second contains the index in the first one (from 0) of the medoid to which class each point belongs to (i.\+e.\+: integers in range \mbox{[}0..k-\/1\mbox{]}).~\newline
+If the dissimilarity matrix contained row names (i.\+e.\+: point names) the output vectors will keep them, too.~\newline
+The program will refuse to load the dissimilarity matrix if not enough RAM is available;~\newline
+also, it will show a warning if the required amount of memory to load it is above 75\% of the available RAM.~\newline
+Remember that using the program \textquotesingle{}jmat csvdump ...\textquotesingle{} you can convert the output files to .csv format. 

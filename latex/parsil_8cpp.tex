@@ -1,0 +1,66 @@
+\hypertarget{parsil_8cpp}{}\doxysection{src/examples/parsil.cpp File Reference}
+\label{parsil_8cpp}\index{src/examples/parsil.cpp@{src/examples/parsil.cpp}}
+{\ttfamily \#include \char`\"{}../headers/debugpar\+\_\+ppam.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../headers/threadhelper.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../headers/fastpam.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../headers/silhouette.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{parsil_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxysubsubsection*{parsil}
+
+See program use in the documention to \mbox{\hyperlink{parsil_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main()}} below~\newline
+ ~\newline
+ NOTE\+: The includes in this source file are for compilation of this program as an example together with the library,~\newline
+ before the library itself is installed. Once you have installed the library (assuming headers are in~\newline
+ /usr/local/include, lib is in /usr/local/lib or in other place included in your compiler search path)~\newline
+ you should substitute this by~\newline
+~\newline
+ \#include $<$parallelpam/debugpar\+\_\+ppam.\+h$>$ etc...~\newline
+~\newline
+ and compile with something like
+
+g++ -\/Wall \mbox{\hyperlink{parsil_8cpp}{parsil.\+cpp}} -\/o parsil -\/ljmatrix -\/lppam 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{parsil_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{parsil_8cpp_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{parsil.cpp@{parsil.cpp}!main@{main}}
+\index{main@{main}!parsil.cpp@{parsil.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\doxysubsubsection*{parsil}
+
+A program to calculate the silhouette of a clustering (usually obtained with parpam) in parallel
+
+The program must be called as
+
+parsil dissim\+\_\+file clasif\+\_\+file \mbox{[}-\/nt numthreads\mbox{]} -\/o out\+\_\+file\+\_\+name
+
+where~\newline
+~\newline
+ {\bfseries{dissim\+\_\+file}}\+: File with the dissimilarity matrix in jmatrix format.~\newline
+ It must be a Symmetric\+Matrix of float or double with dimension (n x n).~\newline
+~\newline
+ {\bfseries{clasif\+\_\+file}}\+: File with the clasification result, as obtained from program parpam.~\newline
+ It must be a (n x 1) matrix (a column vector) of unsigned int values with values in 0..(k-\/1) being k the number of clusters.~\newline
+~\newline
+ {\bfseries{numthreads}}\+: Requested number of threads.~\newline
+ Setting it to 0 will make the program to choose according to the number of processors/cores of your machine (default value).~\newline
+ Setting to -\/1 forces serial implementation (no threads)~\newline
+~\newline
+ {\bfseries{out\+\_\+file\+\_\+name}}\+: Name of the file contaning the silhouette. Compulsory.~\newline
+ The output file will be a Full\+Matrix of double type and dimension (n x 1) (a column vector) with the value of the silhouette for each point.~\newline
+~\newline
+ Points are assumed to be in the same order in the dissimilarity matrix and the clasification vector, and this is the order in which their~\newline
+ silhouettes will be written in the output vector. If the matrix has row names, they will be set for the output file. It the clasif vector~\newline
+ has row names, they will be checked against the row names of the matrix, if both are present. If only clasification vector has names,~\newline
+ they will be set for the output vector.~\newline
+ The program will refuse to load the dissimilarity matrix if not enough RAM is available; also, it will show a warning if the required amount~\newline
+ of memory to load it is above 75\% of the available RAM.~\newline
+ Remember that using the program \textquotesingle{}jmat csvdump ...\textquotesingle{} you can convert the output file to .csv format.~\newline

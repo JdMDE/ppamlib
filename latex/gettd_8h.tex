@@ -1,0 +1,32 @@
+\hypertarget{gettd_8h}{}\doxysection{src/headers/gettd.h File Reference}
+\label{gettd_8h}\index{src/headers/gettd.h@{src/headers/gettd.h}}
+{\ttfamily \#include $<$jmatrixlib/symmetricmatrix.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename disttype $>$ }\\double \mbox{\hyperlink{gettd_8h_a24666b28383a4d55d572027a1404061c}{Get\+TD}} (std\+::vector$<$ indextype $>$ Lmed, std\+::vector$<$ indextype $>$ Lclasif, Symmetric\+Matrix$<$ disttype $>$ \&D)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{gettd_8h_a24666b28383a4d55d572027a1404061c}\label{gettd_8h_a24666b28383a4d55d572027a1404061c}} 
+\index{gettd.h@{gettd.h}!GetTD@{GetTD}}
+\index{GetTD@{GetTD}!gettd.h@{gettd.h}}
+\doxysubsubsection{\texorpdfstring{GetTD()}{GetTD()}}
+{\footnotesize\ttfamily template$<$typename disttype $>$ \\
+double Get\+TD (\begin{DoxyParamCaption}\item[{std\+::vector$<$ indextype $>$}]{Lmed,  }\item[{std\+::vector$<$ indextype $>$}]{Lclasif,  }\item[{Symmetric\+Matrix$<$ disttype $>$ \&}]{D }\end{DoxyParamCaption})}
+
+Function to get the value of the metrics usually employed in PAM minimization\+: sum of distances of each point to its closest medoid divided by number of points.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Lmed} & A vector with the indices of the points which are medoids. These indices refer to the order of points in the distance/dissimilarity matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em Lclasif} & A vector with the index (as position in Lmed) of the medoid closest to each point \\
+\hline
+\mbox{\texttt{ in}}  & {\em D} & A reference to the dissimilariry matrix, as a Symmetric\+Matrix\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value of the total sum of distances divided by the number of points 
+\end{DoxyReturn}

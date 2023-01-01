@@ -1,0 +1,45 @@
+\hypertarget{threadhelper_8h}{}\doxysection{src/headers/threadhelper.h File Reference}
+\label{threadhelper_8h}\index{src/headers/threadhelper.h@{src/headers/threadhelper.h}}
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+unsigned int \mbox{\hyperlink{threadhelper_8h_aa60f03b52578d44ec6d9f4b37fbfe931}{Choose\+Num\+Threads}} (int nthreads)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{threadhelper_8h_ae36b02d8ea9c36c01719658898455b31}\label{threadhelper_8h_ae36b02d8ea9c36c01719658898455b31}} 
+const int {\bfseries NO\+\_\+\+THREADS} =-\/1
+\item 
+\mbox{\Hypertarget{threadhelper_8h_afa16b12b7e78e810bcf2996e1ad5dd01}\label{threadhelper_8h_afa16b12b7e78e810bcf2996e1ad5dd01}} 
+const int {\bfseries AS\+\_\+\+MANY\+\_\+\+AS\+\_\+\+POSSIBLE} =0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{threadhelper_8h_aa60f03b52578d44ec6d9f4b37fbfe931}\label{threadhelper_8h_aa60f03b52578d44ec6d9f4b37fbfe931}} 
+\index{threadhelper.h@{threadhelper.h}!ChooseNumThreads@{ChooseNumThreads}}
+\index{ChooseNumThreads@{ChooseNumThreads}!threadhelper.h@{threadhelper.h}}
+\doxysubsubsection{\texorpdfstring{ChooseNumThreads()}{ChooseNumThreads()}}
+{\footnotesize\ttfamily unsigned int Choose\+Num\+Threads (\begin{DoxyParamCaption}\item[{int}]{nthreads }\end{DoxyParamCaption})}
+
+Auxiliary function to decide the number of threads
+
+
+\begin{DoxyParams}{Parameters}
+{\em nthreads} & Number of thread the user wish to launch. It can be\+:~\newline
+-\/1 to indicate not to use threads (strictly sequential computation)~\newline
+0 to let the program choose according to the available number of cores/threads in the machine~\newline
+Other possitive number to ask for such number of threads~\newline
+ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of threads that will be really used. This is\+:~\newline
+1 for input value -\/1~\newline
+the number of cores/threads in the machine for input value 0 (if hypertheading exists, it is taken into account)~\newline
+the chosen number for any other input value (but a warning message is raised if the chosen number is bigger than the number of cores/threads) 
+\end{DoxyReturn}

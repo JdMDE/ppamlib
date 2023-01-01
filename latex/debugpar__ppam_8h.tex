@@ -1,0 +1,67 @@
+\hypertarget{debugpar__ppam_8h}{}\doxysection{src/headers/debugpar\+\_\+ppam.h File Reference}
+\label{debugpar__ppam_8h}\index{src/headers/debugpar\_ppam.h@{src/headers/debugpar\_ppam.h}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$jmatrixlib/debugpar.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{debugpar__ppam_8h_ab80de43dd21313f4b4ef0fb9549be84b}{Parallelpam\+Set\+Debug}} (bool deb, bool debjmat)
+\item 
+void \mbox{\hyperlink{debugpar__ppam_8h_abe9b5120e8965877660cf0eaa5126ee9}{Parallelpam\+Stop}} (std\+::string errortext)
+\item 
+void \mbox{\hyperlink{debugpar__ppam_8h_a4e0dbf5794e3b28bdd7ec4112906a2f4}{Parallelpam\+Warning}} (std\+::string warntext)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const unsigned char \mbox{\hyperlink{debugpar__ppam_8h_a859b5b291cefbd8d82fcb126b5091b58}{DEBPP}} =0x02
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{debugpar__ppam_8h_ab80de43dd21313f4b4ef0fb9549be84b}\label{debugpar__ppam_8h_ab80de43dd21313f4b4ef0fb9549be84b}} 
+\index{debugpar\_ppam.h@{debugpar\_ppam.h}!ParallelpamSetDebug@{ParallelpamSetDebug}}
+\index{ParallelpamSetDebug@{ParallelpamSetDebug}!debugpar\_ppam.h@{debugpar\_ppam.h}}
+\doxysubsubsection{\texorpdfstring{ParallelpamSetDebug()}{ParallelpamSetDebug()}}
+{\footnotesize\ttfamily void Parallelpam\+Set\+Debug (\begin{DoxyParamCaption}\item[{bool}]{deb,  }\item[{bool}]{debjmat }\end{DoxyParamCaption})}
+
+Sets the debug state to get messages or not in each library 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em deb} & true to get messages, false to suppress them. Default state is false. \\
+\hline
+\mbox{\texttt{ in}}  & {\em debjmar} & true to get debugging messages from the jmatrix library, false to supress them. Default state is false. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{debugpar__ppam_8h_abe9b5120e8965877660cf0eaa5126ee9}\label{debugpar__ppam_8h_abe9b5120e8965877660cf0eaa5126ee9}} 
+\index{debugpar\_ppam.h@{debugpar\_ppam.h}!ParallelpamStop@{ParallelpamStop}}
+\index{ParallelpamStop@{ParallelpamStop}!debugpar\_ppam.h@{debugpar\_ppam.h}}
+\doxysubsubsection{\texorpdfstring{ParallelpamStop()}{ParallelpamStop()}}
+{\footnotesize\ttfamily void Parallelpam\+Stop (\begin{DoxyParamCaption}\item[{std\+::string}]{errortext }\end{DoxyParamCaption})}
+
+Sends an error message to the console and stops the program that is using the library 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em errortext} & The text of the message to be shown. It will appear after a standard message saying that is comes from this library. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{debugpar__ppam_8h_a4e0dbf5794e3b28bdd7ec4112906a2f4}\label{debugpar__ppam_8h_a4e0dbf5794e3b28bdd7ec4112906a2f4}} 
+\index{debugpar\_ppam.h@{debugpar\_ppam.h}!ParallelpamWarning@{ParallelpamWarning}}
+\index{ParallelpamWarning@{ParallelpamWarning}!debugpar\_ppam.h@{debugpar\_ppam.h}}
+\doxysubsubsection{\texorpdfstring{ParallelpamWarning()}{ParallelpamWarning()}}
+{\footnotesize\ttfamily void Parallelpam\+Warning (\begin{DoxyParamCaption}\item[{std\+::string}]{warntext }\end{DoxyParamCaption})}
+
+Sends a warning message to the console and goes on with the program that is using the library 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em errortext} & The text of the message to be shown. It will appear after a standard message saying that is comes from this library. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{debugpar__ppam_8h_a859b5b291cefbd8d82fcb126b5091b58}\label{debugpar__ppam_8h_a859b5b291cefbd8d82fcb126b5091b58}} 
+\index{debugpar\_ppam.h@{debugpar\_ppam.h}!DEBPP@{DEBPP}}
+\index{DEBPP@{DEBPP}!debugpar\_ppam.h@{debugpar\_ppam.h}}
+\doxysubsubsection{\texorpdfstring{DEBPP}{DEBPP}}
+{\footnotesize\ttfamily const unsigned char DEBPP =0x02}
+
+This constant is to allow selective debug by library. Each library will print messages or not using a test with logical AND between its particular constant and the DEB global variable. This allows the use of the system either in each separate package or in the global one 

@@ -1,0 +1,62 @@
+\hypertarget{classDifftimeHelper}{}\doxysection{Difftime\+Helper Class Reference}
+\label{classDifftimeHelper}\index{DifftimeHelper@{DifftimeHelper}}
+
+
+{\ttfamily \#include $<$diftimehelper.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classDifftimeHelper_ab99099dd36cf00f5996722116e8b7d2a}{Difftime\+Helper}} ()
+\item 
+void \mbox{\hyperlink{classDifftimeHelper_adc04fb7725c82e635e0c0b84b34e3405}{Start\+Clock}} (std\+::string message)
+\item 
+double \mbox{\hyperlink{classDifftimeHelper_ae59695967f776ff3636dfa2a725fc238}{End\+Clock}} (bool deb)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+@\+Difftimehelper class to help in measuring and printing time spent by parts of the programs 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classDifftimeHelper_ab99099dd36cf00f5996722116e8b7d2a}\label{classDifftimeHelper_ab99099dd36cf00f5996722116e8b7d2a}} 
+\index{DifftimeHelper@{DifftimeHelper}!DifftimeHelper@{DifftimeHelper}}
+\index{DifftimeHelper@{DifftimeHelper}!DifftimeHelper@{DifftimeHelper}}
+\doxysubsubsection{\texorpdfstring{DifftimeHelper()}{DifftimeHelper()}}
+{\footnotesize\ttfamily Difftime\+Helper\+::\+Difftime\+Helper (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Default constructor 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classDifftimeHelper_ae59695967f776ff3636dfa2a725fc238}\label{classDifftimeHelper_ae59695967f776ff3636dfa2a725fc238}} 
+\index{DifftimeHelper@{DifftimeHelper}!EndClock@{EndClock}}
+\index{EndClock@{EndClock}!DifftimeHelper@{DifftimeHelper}}
+\doxysubsubsection{\texorpdfstring{EndClock()}{EndClock()}}
+{\footnotesize\ttfamily double Difftime\+Helper\+::\+End\+Clock (\begin{DoxyParamCaption}\item[{bool}]{deb }\end{DoxyParamCaption})}
+
+Function to end counting of time elapsed from the last call to Start\+Clock. It prints the message with which Start\+Clock was called if requested.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em deb} & Boolean value to print or not the message stored by the last call to Start\+Clock \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classDifftimeHelper_adc04fb7725c82e635e0c0b84b34e3405}\label{classDifftimeHelper_adc04fb7725c82e635e0c0b84b34e3405}} 
+\index{DifftimeHelper@{DifftimeHelper}!StartClock@{StartClock}}
+\index{StartClock@{StartClock}!DifftimeHelper@{DifftimeHelper}}
+\doxysubsubsection{\texorpdfstring{StartClock()}{StartClock()}}
+{\footnotesize\ttfamily void Difftime\+Helper\+::\+Start\+Clock (\begin{DoxyParamCaption}\item[{std\+::string}]{message }\end{DoxyParamCaption})}
+
+Function to start counting of time. It can be called nested inside other call made before; when it finishes each pair of Start\+Clock/\+End\+Clock calls will show its message
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em message} & Message that will be printed in the console when the corresponding End\+Clock that matches this call be called. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/headers/\mbox{\hyperlink{diftimehelper_8h}{diftimehelper.\+h}}\item 
+src/library/diftimehelper.\+cpp\end{DoxyCompactItemize}

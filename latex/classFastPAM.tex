@@ -1,0 +1,241 @@
+\hypertarget{classFastPAM}{}\doxysection{Fast\+PAM$<$ disttype $>$ Class Template Reference}
+\label{classFastPAM}\index{FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}}
+
+
+{\ttfamily \#include $<$fastpam.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classFastPAM_a43d496ee23e2b68b2512e25fbb574c79}{Fast\+PAM}} (Symmetric\+Matrix$<$ disttype $>$ $\ast$Dm, indextype num\+\_\+medoids, unsigned char inimet, int limiter, int nthreads)
+\item 
+void \mbox{\hyperlink{classFastPAM_a6db012c7e81336c03784b98a9e3a5d65}{Init}} (std\+::vector$<$ indextype $>$ initmedoids, unsigned int nt)
+\item 
+void \mbox{\hyperlink{classFastPAM_a41a6597eacd2cffbb7e6afc4ea5483c4}{Run}} (unsigned char opt\+\_\+method, unsigned int nt)
+\item 
+Full\+Matrix$<$ indextype $>$ \& \mbox{\hyperlink{classFastPAM_a004560d953b824b7d2badc35ad39fc7a}{Get\+Medoids}} ()
+\item 
+Full\+Matrix$<$ indextype $>$ \& \mbox{\hyperlink{classFastPAM_a015e1caf775544088efad6cb22e3945c}{Get\+Medoids}} (std\+::vector$<$ std\+::string $>$ rownames)
+\item 
+Full\+Matrix$<$ indextype $>$ \& \mbox{\hyperlink{classFastPAM_a014052a1c285c934788c417bf31b8c5c}{Get\+Assign}} ()
+\item 
+Full\+Matrix$<$ indextype $>$ \& \mbox{\hyperlink{classFastPAM_a2b9a18a131270ff61c88801c26b64f8c}{Get\+Assign}} (std\+::vector$<$ std\+::string $>$ rownames)
+\item 
+std\+::vector$<$ disttype $>$ \mbox{\hyperlink{classFastPAM_ad3ef5cff63dbb77981ec258410a3b299}{Get\+TDHistory}} ()
+\item 
+std\+::vector$<$ indextype $>$ \mbox{\hyperlink{classFastPAM_a9fe4116efa5b2f29218502b7730ef7c7}{Get\+Reassign\+History}} ()
+\item 
+double \mbox{\hyperlink{classFastPAM_a59fec24a0cc69b61eb7c256ca75bfbd4}{Get\+In\+Time}} ()
+\item 
+double \mbox{\hyperlink{classFastPAM_a822707ef1ce69ed950407484f1ee75ec}{Get\+Opt\+Time}} ()
+\item 
+unsigned int \mbox{\hyperlink{classFastPAM_adb80b4e27c3029fd0cd9472a5bcbac97}{Get\+Num\+Iter}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename disttype$>$\newline
+class Fast\+PAM$<$ disttype $>$}
+
+A class to implement the Partitioning Around Medoids (PAM) clustering metho described in~\newline
+~\newline
+Schubert, E. and Rousseeuw, P.\+J.\+: \char`\"{}\+Fast and eager k-\/medoids clustering\+: O(k) runtime improvement of the PAM, CLARA, and CLARANS algorithms.\char`\"{}~\newline
+Information Systems, vol. 101, p. 101804, 2021.~\newline
+doi\+: \href{https://doi.org/10.1016/j.is.2021.101804}{\texttt{ https\+://doi.\+org/10.\+1016/j.\+is.\+2021.\+101804}}~\newline
+~\newline
+Notice that the actual values of the vectors (instances) are not needed. To recover them, look at the data matrix used to generate the distance matrix.~\newline
+The number of instances, N, is never passed since dissimilarity matrix is NxN and therefore its size indicates the N value.~\newline
+With respect to the calculated value, it consists on two vectors. The first one has as many components as requested medoids and the second has as many components as instances.~\newline
+Medoids are expressed in the first one by its number in the array of points (row in the dissimilarity matrix) starting at 0 (C++ convention).~\newline
+The second vector contains the number of the medoid (i.\+e.\+: the cluster) to which each instance has been assigned, according to their order in the first vector (also from 0).~\newline
+These vectors are returned by the functions Get\+Medoids and Get\+Assign (see their respective documentation) 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classFastPAM_a43d496ee23e2b68b2512e25fbb574c79}\label{classFastPAM_a43d496ee23e2b68b2512e25fbb574c79}} 
+\index{FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}!FastPAM@{FastPAM}}
+\index{FastPAM@{FastPAM}!FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}}
+\doxysubsubsection{\texorpdfstring{FastPAM()}{FastPAM()}}
+{\footnotesize\ttfamily template$<$typename disttype $>$ \\
+template \mbox{\hyperlink{classFastPAM}{Fast\+PAM}}$<$ disttype $>$\+::\mbox{\hyperlink{classFastPAM}{Fast\+PAM}} (\begin{DoxyParamCaption}\item[{Symmetric\+Matrix$<$ disttype $>$ $\ast$}]{Dm,  }\item[{indextype}]{num\+\_\+medoids,  }\item[{unsigned char}]{inimet,  }\item[{int}]{limiter,  }\item[{int}]{nthreads }\end{DoxyParamCaption})}
+
+Default (and only available) constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Dm} & A pointer to a Symmetric\+Matrix which is the distance/dissimilarity matrix \\
+\hline
+\mbox{\texttt{ in}}  & {\em num\+\_\+medois} & The number of medoids to be found \\
+\hline
+\mbox{\texttt{ in}}  & {\em initmet} & Initialization method (one of the constants INIT\+\_\+\+METHOD\+\_\+\+PREVIOUS, INIT\+\_\+\+METHOD\+\_\+\+BUILD or INIT\+\_\+\+METHOD\+\_\+\+LAB) \\
+\hline
+\mbox{\texttt{ in}}  & {\em limiter} & Maximum number of iterations allowed in the optimization phase. Use 0 to perform only initialization. \\
+\hline
+\mbox{\texttt{ in}}  & {\em nthreads} & Number of threads to be opened. Normally, use the result of function Choose\+Num\+Threads(\+AS\+\_\+\+MANY\+\_\+\+AS\+\_\+\+POSSIBLE) to get this parameter. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classFastPAM_a014052a1c285c934788c417bf31b8c5c}\label{classFastPAM_a014052a1c285c934788c417bf31b8c5c}} 
+\index{FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}!GetAssign@{GetAssign}}
+\index{GetAssign@{GetAssign}!FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}}
+\doxysubsubsection{\texorpdfstring{GetAssign()}{GetAssign()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename disttype $>$ \\
+template Full\+Matrix$<$ indextype $>$ \& \mbox{\hyperlink{classFastPAM}{Fast\+PAM}}$<$ disttype $>$\+::Get\+Assign (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function gets the medoid to which each point is closest to as a Full\+Matrix of dimension (num\+\_\+points x 1), i.\+e. a column vector
+
+\begin{DoxyReturn}{Returns}
+The column vector (as a Full\+Matrix) with the indices of the medoids in the vector of medoids (as returned by \mbox{\hyperlink{classFastPAM_a004560d953b824b7d2badc35ad39fc7a}{Get\+Medoids()}})~\newline
+ Obviously, and since this index is in \mbox{[}0..(num\+\_\+medoids-\/1)\mbox{]}, is also a class label. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classFastPAM_a2b9a18a131270ff61c88801c26b64f8c}\label{classFastPAM_a2b9a18a131270ff61c88801c26b64f8c}} 
+\index{FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}!GetAssign@{GetAssign}}
+\index{GetAssign@{GetAssign}!FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}}
+\doxysubsubsection{\texorpdfstring{GetAssign()}{GetAssign()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename disttype $>$ \\
+Full\+Matrix$<$indextype$>$\& \mbox{\hyperlink{classFastPAM}{Fast\+PAM}}$<$ disttype $>$\+::Get\+Assign (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$}]{rownames }\end{DoxyParamCaption})}
+
+This function gets the medoid to which each point is closest to as a Full\+Matrix of dimension (num\+\_\+medoids x 1), i.\+e. a column vector with point names
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em rownames} & The names of all points as they are stored in the dissimilarity matrix, if it has names.~\newline
+ These names are simply attached in the same order to the returned vector.~\newline
+ These parameter can be obtained from the dissimilarity matrix with D.\+Get\+Row\+Names()\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The column vector (as a Full\+Matrix) with the indices of the medoids in the vector of medoids (as returned by \mbox{\hyperlink{classFastPAM_a004560d953b824b7d2badc35ad39fc7a}{Get\+Medoids()}})~\newline
+ Obviously, and since this index is in \mbox{[}0..(num\+\_\+medoids-\/1)\mbox{]}, is also a class label. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classFastPAM_a59fec24a0cc69b61eb7c256ca75bfbd4}\label{classFastPAM_a59fec24a0cc69b61eb7c256ca75bfbd4}} 
+\index{FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}!GetInTime@{GetInTime}}
+\index{GetInTime@{GetInTime}!FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}}
+\doxysubsubsection{\texorpdfstring{GetInTime()}{GetInTime()}}
+{\footnotesize\ttfamily template$<$typename disttype $>$ \\
+double \mbox{\hyperlink{classFastPAM}{Fast\+PAM}}$<$ disttype $>$\+::Get\+In\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function returns the total time (in seconds) used for the initialization phase.
+
+\begin{DoxyReturn}{Returns}
+Time (in seconds) used for initalization 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classFastPAM_a004560d953b824b7d2badc35ad39fc7a}\label{classFastPAM_a004560d953b824b7d2badc35ad39fc7a}} 
+\index{FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}!GetMedoids@{GetMedoids}}
+\index{GetMedoids@{GetMedoids}!FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}}
+\doxysubsubsection{\texorpdfstring{GetMedoids()}{GetMedoids()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename disttype $>$ \\
+template Full\+Matrix$<$ indextype $>$ \& \mbox{\hyperlink{classFastPAM}{Fast\+PAM}}$<$ disttype $>$\+::Get\+Medoids (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+This function gets the medoids as a Full\+Matrix of dimension (num\+\_\+medoids x 1), i.\+e. a column vector
+
+\begin{DoxyReturn}{Returns}
+The column vector (as a Full\+Matrix) with the indices of the medoids in the order they appear in the dissimilarity matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classFastPAM_a015e1caf775544088efad6cb22e3945c}\label{classFastPAM_a015e1caf775544088efad6cb22e3945c}} 
+\index{FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}!GetMedoids@{GetMedoids}}
+\index{GetMedoids@{GetMedoids}!FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}}
+\doxysubsubsection{\texorpdfstring{GetMedoids()}{GetMedoids()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename disttype $>$ \\
+Full\+Matrix$<$indextype$>$\& \mbox{\hyperlink{classFastPAM}{Fast\+PAM}}$<$ disttype $>$\+::Get\+Medoids (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::string $>$}]{rownames }\end{DoxyParamCaption})}
+
+This function gets the medoids as a Full\+Matrix of dimension (num\+\_\+medoids x 1), i.\+e. a column vector with point names
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em rownames} & The names of all points as they are stored in the dissimilarity matrix, if it has names.~\newline
+ The function selects specifically those which are medoids and uses them as names for the returned vector.~\newline
+ These parameter can be obtained from the dissimilarity matrix with D.\+Get\+Row\+Names()\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The column vector (as a Full\+Matrix) with the indices of the medoids in the order they appear in the dissimilarity matrix 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classFastPAM_adb80b4e27c3029fd0cd9472a5bcbac97}\label{classFastPAM_adb80b4e27c3029fd0cd9472a5bcbac97}} 
+\index{FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}!GetNumIter@{GetNumIter}}
+\index{GetNumIter@{GetNumIter}!FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}}
+\doxysubsubsection{\texorpdfstring{GetNumIter()}{GetNumIter()}}
+{\footnotesize\ttfamily template$<$typename disttype $>$ \\
+unsigned int \mbox{\hyperlink{classFastPAM}{Fast\+PAM}}$<$ disttype $>$\+::Get\+Num\+Iter (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function returns the number of iterations done in the optimization phase until convergence (or limiter of no convergence is reached)
+
+\begin{DoxyReturn}{Returns}
+Number of iterations used in optimization 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classFastPAM_a822707ef1ce69ed950407484f1ee75ec}\label{classFastPAM_a822707ef1ce69ed950407484f1ee75ec}} 
+\index{FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}!GetOptTime@{GetOptTime}}
+\index{GetOptTime@{GetOptTime}!FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}}
+\doxysubsubsection{\texorpdfstring{GetOptTime()}{GetOptTime()}}
+{\footnotesize\ttfamily template$<$typename disttype $>$ \\
+double \mbox{\hyperlink{classFastPAM}{Fast\+PAM}}$<$ disttype $>$\+::Get\+Opt\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function returns the total time (in seconds) used for the optimization phase.
+
+\begin{DoxyReturn}{Returns}
+Time (in seconds) used for optimization 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classFastPAM_a9fe4116efa5b2f29218502b7730ef7c7}\label{classFastPAM_a9fe4116efa5b2f29218502b7730ef7c7}} 
+\index{FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}!GetReassignHistory@{GetReassignHistory}}
+\index{GetReassignHistory@{GetReassignHistory}!FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}}
+\doxysubsubsection{\texorpdfstring{GetReassignHistory()}{GetReassignHistory()}}
+{\footnotesize\ttfamily template$<$typename disttype $>$ \\
+std\+::vector$<$indextype$>$ \mbox{\hyperlink{classFastPAM}{Fast\+PAM}}$<$ disttype $>$\+::Get\+Reassign\+History (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function returns the number of points that have been swapped between tow clusters along the succesive optimization iterations.
+
+\begin{DoxyReturn}{Returns}
+The vector with the number of swapped points for each optimization step 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classFastPAM_ad3ef5cff63dbb77981ec258410a3b299}\label{classFastPAM_ad3ef5cff63dbb77981ec258410a3b299}} 
+\index{FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}!GetTDHistory@{GetTDHistory}}
+\index{GetTDHistory@{GetTDHistory}!FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}}
+\doxysubsubsection{\texorpdfstring{GetTDHistory()}{GetTDHistory()}}
+{\footnotesize\ttfamily template$<$typename disttype $>$ \\
+std\+::vector$<$disttype$>$ \mbox{\hyperlink{classFastPAM}{Fast\+PAM}}$<$ disttype $>$\+::Get\+TDHistory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+This function returns the values of the optimization metrics TD (i.\+e.\+: the sum of distances of each point to its closest medoid, divided by the number of points) along the succesive optimization iterations.
+
+\begin{DoxyReturn}{Returns}
+The vector with the values of TD for each optimization step 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classFastPAM_a6db012c7e81336c03784b98a9e3a5d65}\label{classFastPAM_a6db012c7e81336c03784b98a9e3a5d65}} 
+\index{FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}!Init@{Init}}
+\index{Init@{Init}!FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}}
+\doxysubsubsection{\texorpdfstring{Init()}{Init()}}
+{\footnotesize\ttfamily template$<$typename disttype $>$ \\
+template void \mbox{\hyperlink{classFastPAM}{Fast\+PAM}}$<$ disttype $>$\+::Init (\begin{DoxyParamCaption}\item[{std\+::vector$<$ indextype $>$}]{initmedoids,  }\item[{unsigned int}]{nt }\end{DoxyParamCaption})}
+
+This function performs the initialization according to the method set at the class constructor
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em initmedoids} & A vector with the indices of the points that are considered as medoids after the initialization phase.~\newline
+ This parameter makes sense (and it is used) ONLY for the initialization method PREV and is probably the result of a previous application of the algorithm, possibly with limiter=0. For other methods it is ignored; just pass an empty vector \\
+\hline
+\mbox{\texttt{ in}}  & {\em nt} & Number of threads to be opened. Normally, use the result of function Choose\+Num\+Threads(\+AS\+\_\+\+MANY\+\_\+\+AS\+\_\+\+POSSIBLE) to get this parameter. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classFastPAM_a41a6597eacd2cffbb7e6afc4ea5483c4}\label{classFastPAM_a41a6597eacd2cffbb7e6afc4ea5483c4}} 
+\index{FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}!Run@{Run}}
+\index{Run@{Run}!FastPAM$<$ disttype $>$@{FastPAM$<$ disttype $>$}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily template$<$typename disttype $>$ \\
+template void \mbox{\hyperlink{classFastPAM}{Fast\+PAM}}$<$ disttype $>$\+::Run (\begin{DoxyParamCaption}\item[{unsigned char}]{opt\+\_\+method,  }\item[{unsigned int}]{nt }\end{DoxyParamCaption})}
+
+This function runs the optimization phase according to the chosen optimization method
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em opt\+\_\+method} & Optimization method (one of the constants OPT\+\_\+\+METHOD\+\_\+\+FASTPAM1 or OPT\+\_\+\+METHOD\+\_\+\+FASTPAMBSIL) \\
+\hline
+\mbox{\texttt{ in}}  & {\em nt} & Number of threads to be opened. Normally, use the result of function Choose\+Num\+Threads(\+AS\+\_\+\+MANY\+\_\+\+AS\+\_\+\+POSSIBLE) to get this parameter. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/headers/\mbox{\hyperlink{fastpam_8h}{fastpam.\+h}}\item 
+src/library/fastpam.\+cpp\end{DoxyCompactItemize}

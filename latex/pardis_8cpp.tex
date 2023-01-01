@@ -1,0 +1,75 @@
+\hypertarget{pardis_8cpp}{}\doxysection{src/examples/pardis.cpp File Reference}
+\label{pardis_8cpp}\index{src/examples/pardis.cpp@{src/examples/pardis.cpp}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include \char`\"{}../headers/fastpam.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../headers/debugpar\+\_\+ppam.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../headers/threadhelper.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../headers/dissimmat.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{pardis_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxysubsubsection*{pardis}
+
+See program use in the documention to \mbox{\hyperlink{pardis_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main()}} below~\newline
+ ~\newline
+ NOTE\+: The includes in this source file are for compilation of this program as an example together with the library,~\newline
+ before the library itself is installed. Once you have installed the library (assuming headers are in~\newline
+ /usr/local/include, lib is in /usr/local/lib or in other place included in your compiler search path)~\newline
+ you should substitute this by~\newline
+~\newline
+ \#include $<$parallelpam/debugpar\+\_\+ppam.\+h$>$ etc...~\newline
+~\newline
+ and compile with something like
+
+g++ -\/Wall \mbox{\hyperlink{pardis_8cpp}{pardis.\+cpp}} -\/o pardis -\/ljmatrix -\/lppam 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{pardis_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{pardis_8cpp_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{pardis.cpp@{pardis.cpp}!main@{main}}
+\index{main@{main}!pardis.cpp@{pardis.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\doxysubsubsection*{pardis}
+
+A program to calculate the distance/dissimilarity matrix between the rows of an input matrix considering each row as a vector/individual and each column as a dimension/feature.
+
+The program must be called as
+
+pardis input\+\_\+file \mbox{[}-\/dis distype\mbox{]} \mbox{[}-\/vtype valuetype\mbox{]} \mbox{[}-\/nt numthreads\mbox{]} \mbox{[}-\/com comment\mbox{]} -\/o out\+\_\+file\+\_\+name
+
+where~\newline
+~\newline
+{\bfseries{input\+\_\+file}}\+: File with the input matrix in jmatrix format.~\newline
+ It must be a matrix of float or double with dimension (n x p) where the individuals (points/vectors,~\newline
+ which are n) must be the rows and components/dimensions (which are p) must be the columns.~\newline
+ Remember that you can use the program \textquotesingle{}jmatrix csvread ...\textquotesingle{} to create this file from a .csv table~\newline
+ This argument is compulsory and must be immediately after the program name.~\newline
+~\newline
+{\bfseries{dis}}\+: Type of metrics/dissimilarity, which must be one of the strings \textquotesingle{}L1\textquotesingle{} (Manhattan), \textquotesingle{}L2\textquotesingle{} (Euclidean)~\newline
+ or \textquotesingle{}Pe\textquotesingle{} (Pearson dissimilarity). Default\+: L2.~\newline
+~\newline
+{\bfseries{vtype}}\+: Data type for the output dissimilarity/distance matrix.~\newline
+ It must be one of the strings \textquotesingle{}float\textquotesingle{} or \textquotesingle{}double\textquotesingle{}. Default\+: float.~\newline
+~\newline
+{\bfseries{numthreads}}\+: Requested number of threads.~\newline
+ Setting it to 0 will make the program to choose according to the number of processors/cores of your machine (default value).~\newline
+ Setting to -\/1 forces serial implementation (no threads)~\newline
+~\newline
+{\bfseries{comment}}\+: Comment to be attached to the dissimilarity matrix. Default\+: no comment will be added.~\newline
+~\newline
+{\bfseries{out\+\_\+file\+\_\+name}}\+: Name of the file contaning the dissimilarity matrix as a binary jmatrix.~\newline
+ If the input matrix has row names, these names will be copied to the dissimilarity matrix as row names, too.~\newline
+ This argument is compulsory and must be the last one.~\newline
+~\newline
+Calling this program as {\bfseries{pardisd}} turns on debugging; calling it as {\bfseries{pardisdd}} turns on the jmatrix library debugging, too.~\newline
+The distance/dissimilarity matrix in the output file will be a Symmetric\+Matrix of the requested data type and size (n x n).~\newline
+The used memory is quadratic with n (concretely, n$\ast$(n+1)/2) so it can be very big.~\newline
+The program refuses to create it if not enough RAM is available, and shows a warning~\newline
+if the required amount of memory is above 75\% of the available RAM.~\newline

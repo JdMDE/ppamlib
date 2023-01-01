@@ -1,0 +1,58 @@
+\hypertarget{tdvalue_8cpp}{}\doxysection{src/examples/tdvalue.cpp File Reference}
+\label{tdvalue_8cpp}\index{src/examples/tdvalue.cpp@{src/examples/tdvalue.cpp}}
+{\ttfamily \#include $<$jmatrixlib/fullmatrix.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}../headers/debugpar\+\_\+ppam.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}../headers/gettd.\+h\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{tdvalue_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char $\ast$argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxysubsubsection*{tdvalue}
+
+See program use in the documention to \mbox{\hyperlink{tdvalue_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main()}} below~\newline
+ ~\newline
+ NOTE\+: The includes in this source file are for compilation of this program as an example together with the library,~\newline
+ before the library itself is installed. Once you have installed the library (assuming headers are in~\newline
+ /usr/local/include, lib is in /usr/local/lib or in other place included in your compiler search path)~\newline
+ you should substitute this by~\newline
+~\newline
+ \#include $<$parallelpam/debugpar\+\_\+ppam.\+h$>$ etc...~\newline
+~\newline
+ and compile with something like
+
+g++ -\/Wall \mbox{\hyperlink{tdvalue_8cpp}{tdvalue.\+cpp}} -\/o tdvalue -\/ljmatrix -\/lppam 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{tdvalue_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\label{tdvalue_8cpp_a0ddf1224851353fc92bfbff6f499fa97}} 
+\index{tdvalue.cpp@{tdvalue.cpp}!main@{main}}
+\index{main@{main}!tdvalue.cpp@{tdvalue.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$}]{argv\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+\doxysubsubsection*{tdvalue}
+
+A program to obtain the value of the TD optimization value of a clustering result.~\newline
+TD is defined as the sum of distances of each point to its closest medoid divided by the total number of points.~\newline
+This program takes as all its inputs binary files in jmatrix format.
+
+The program must be called as \begin{DoxyVerb}tdvalue med_file clas_file ds_file
+\end{DoxyVerb}
+ where, if n is the number of points and k the number of medoids,~\newline
+~\newline
+ {\bfseries{med\+\_\+file}}\+: File with the indexes of the medoids in jmatrix format. Compulsory~\newline
+ It must be a (k x 1) full matrix (column vector) of indextype (unsigned int)~\newline
+~\newline
+ {\bfseries{class\+\_\+file}}\+: File with the number (from 0 to k-\/1) of the medoid each point is closest to. Compulsory~\newline
+ It must be a (n x 1) full matrix (column vector) of indextype (unsigned int)~\newline
+~\newline
+ {\bfseries{ds\+\_\+file}}\+: File with the dissimilarity matrix in jmatrix format. Compulsory~\newline
+ It must be a symmetric matrix of float or double with dimension (n x n).~\newline
+~\newline
+The only output will be a double number written in the screen (unless you call the program as {\bfseries{tdvalued}} or {\bfseries{tdvaluedd}} for debugging).~\newline
+Points are assumed to be in the same order in the dissimilarity matrix and the classification vector.~\newline
+The program will refuse to load the dissimilarity matrix if not enough RAM is available.~\newline
+Also, it will show a warning if the required amount of memory to load it is above 75\% of the available RAM.~\newline

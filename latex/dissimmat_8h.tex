@@ -1,0 +1,73 @@
+\hypertarget{dissimmat_8h}{}\doxysection{src/headers/dissimmat.h File Reference}
+\label{dissimmat_8h}\index{src/headers/dissimmat.h@{src/headers/dissimmat.h}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$jmatrixlib/fullmatrix.\+h$>$}\newline
+{\ttfamily \#include $<$jmatrixlib/sparsematrix.\+h$>$}\newline
+{\ttfamily \#include $<$jmatrixlib/symmetricmatrix.\+h$>$}\newline
+{\ttfamily \#include $<$jmatrixlib/memhelper.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename counttype , typename disttype $>$ }\\Symmetric\+Matrix$<$ disttype $>$ \& \mbox{\hyperlink{dissimmat_8h_afdff4724eb84f1908e3558495e9cc6a2}{Calc\+Dist\+From\+Full}} (Full\+Matrix$<$ counttype $>$ \&M, unsigned char dtype, unsigned int nthr)
+\item 
+{\footnotesize template$<$typename counttype , typename disttype $>$ }\\Symmetric\+Matrix$<$ disttype $>$ \& \mbox{\hyperlink{dissimmat_8h_a40e7d4a665bd780ca9f95ce48e01992c}{Calc\+Dist\+From\+Sparse}} (Sparse\+Matrix$<$ counttype $>$ \&M, unsigned char dtype, unsigned int nthr)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{dissimmat_8h_a8778cbfdbaa0c28141675f892c73494b}\label{dissimmat_8h_a8778cbfdbaa0c28141675f892c73494b}} 
+const unsigned char {\bfseries DL1} =0x0
+\item 
+\mbox{\Hypertarget{dissimmat_8h_a69ca247a867fe198d6099a964f827684}\label{dissimmat_8h_a69ca247a867fe198d6099a964f827684}} 
+const unsigned char {\bfseries DL2} =0x1
+\item 
+\mbox{\Hypertarget{dissimmat_8h_a255d119cf1c29f4ef8ed09ccfd138c76}\label{dissimmat_8h_a255d119cf1c29f4ef8ed09ccfd138c76}} 
+const unsigned char {\bfseries DPe} =0x2
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{dissimmat_8h_afdff4724eb84f1908e3558495e9cc6a2}\label{dissimmat_8h_afdff4724eb84f1908e3558495e9cc6a2}} 
+\index{dissimmat.h@{dissimmat.h}!CalcDistFromFull@{CalcDistFromFull}}
+\index{CalcDistFromFull@{CalcDistFromFull}!dissimmat.h@{dissimmat.h}}
+\doxysubsubsection{\texorpdfstring{CalcDistFromFull()}{CalcDistFromFull()}}
+{\footnotesize\ttfamily template$<$typename counttype , typename disttype $>$ \\
+Symmetric\+Matrix$<$disttype$>$\& Calc\+Dist\+From\+Full (\begin{DoxyParamCaption}\item[{Full\+Matrix$<$ counttype $>$ \&}]{M,  }\item[{unsigned char}]{dtype,  }\item[{unsigned int}]{nthr }\end{DoxyParamCaption})}
+
+Function to calculate the distance matrix from the data matrix if such matrix is a Full\+Matrix (in the terminology of the JMatrix library)~\newline
+counttype is the data type of the data matrix~\newline
+disttype is the data type of the dissimilarity matrix to be returned (use float or double)
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em M} & The Full\+Matrix with the data where rows represent individuals (points) and columns are characteristics (dimensions) \\
+\hline
+\mbox{\texttt{ in}}  & {\em dtype} & Distance type. Use one of the constants DL1 for Manhattan/\+City block distance, DL2 for Euclidean distance and Dpe for Pearson dissimilarity coefficient \\
+\hline
+\mbox{\texttt{ in}}  & {\em nthr} & Number of threads to be opened. Normally, use the result of function Choose\+Num\+Threads(\+AS\+\_\+\+MANY\+\_\+\+AS\+\_\+\+POSSIBLE) to get this parameter. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{dissimmat_8h_a40e7d4a665bd780ca9f95ce48e01992c}\label{dissimmat_8h_a40e7d4a665bd780ca9f95ce48e01992c}} 
+\index{dissimmat.h@{dissimmat.h}!CalcDistFromSparse@{CalcDistFromSparse}}
+\index{CalcDistFromSparse@{CalcDistFromSparse}!dissimmat.h@{dissimmat.h}}
+\doxysubsubsection{\texorpdfstring{CalcDistFromSparse()}{CalcDistFromSparse()}}
+{\footnotesize\ttfamily template$<$typename counttype , typename disttype $>$ \\
+Symmetric\+Matrix$<$disttype$>$\& Calc\+Dist\+From\+Sparse (\begin{DoxyParamCaption}\item[{Sparse\+Matrix$<$ counttype $>$ \&}]{M,  }\item[{unsigned char}]{dtype,  }\item[{unsigned int}]{nthr }\end{DoxyParamCaption})}
+
+Function to calculate the distance matrix from the data matrix if such matrix is a Sparse\+Matrix (in the terminology of the JMatrix library)~\newline
+counttype is the data type of the data matrix~\newline
+disttype is the data type of the dissimilarity matrix to be returned (use float or double)
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em M} & The Sparse\+Matrix with the data where rows represent individuals (points) and columns are characteristics (dimensions) \\
+\hline
+\mbox{\texttt{ in}}  & {\em dtype} & Distance type. Use one of the constants DL1 for Manhattan/\+City block distance, DL2 for Euclidean distance and Dpe for Pearson dissimilarity coefficient \\
+\hline
+\mbox{\texttt{ in}}  & {\em nthr} & Number of threads to be opened. Normally, use the result of function Choose\+Num\+Threads(\+AS\+\_\+\+MANY\+\_\+\+AS\+\_\+\+POSSIBLE) to get this parameter. \\
+\hline
+\end{DoxyParams}

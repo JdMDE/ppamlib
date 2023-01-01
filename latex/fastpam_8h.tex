@@ -1,0 +1,153 @@
+\hypertarget{fastpam_8h}{}\doxysection{src/headers/fastpam.h File Reference}
+\label{fastpam_8h}\index{src/headers/fastpam.h@{src/headers/fastpam.h}}
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$typeinfo$>$}\newline
+{\ttfamily \#include $<$jmatrixlib/fullmatrix.\+h$>$}\newline
+{\ttfamily \#include $<$jmatrixlib/symmetricmatrix.\+h$>$}\newline
+{\ttfamily \#include $<$jmatrixlib/memhelper.\+h$>$}\newline
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classFastPAM}{Fast\+PAM$<$ disttype $>$}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{fastpam_8h_a3ab5ff0e9c7934e79358382686b40c2e}{MIND}}~std\+::numeric\+\_\+limits$<$disttype$>$\+::min()
+\item 
+\#define \mbox{\hyperlink{fastpam_8h_a36b1b09b4ae10656d186f90ab767c450}{MAXD}}~std\+::numeric\+\_\+limits$<$disttype$>$\+::max()
+\end{DoxyCompactItemize}
+
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::string \mbox{\hyperlink{fastpam_8h_ac9abe5c8dcf349d730ecce5c1f3d2f8b}{init\+\_\+method\+\_\+names}} \mbox{[}\mbox{\hyperlink{fastpam_8h_a04677ef61fda1b00568b187f8ec47fd4}{NUM\+\_\+\+INIT\+\_\+\+METHODS}}\mbox{]} =\{\char`\"{}PREV\char`\"{},\char`\"{}BUILD\char`\"{},\char`\"{}LAB\char`\"{}\}
+\item 
+const std\+::string \mbox{\hyperlink{fastpam_8h_a51effe5e4aa6f0b41c14312a7ac62c6f}{opt\+\_\+method\+\_\+names}} \mbox{[}\mbox{\hyperlink{fastpam_8h_a4f00c39166c7c645c1d2b9cae6437e78}{NUM\+\_\+\+OPT\+\_\+\+METHODS}}\mbox{]} =\{\char`\"{}FASTPAM1\char`\"{},\char`\"{}TWOBRANCH\char`\"{}\}
+\item 
+const unsigned int \mbox{\hyperlink{fastpam_8h_a58c68067aa9bf4b23ef5cdbdd69a7c19}{MAX\+\_\+\+ITER}} =1001
+\item 
+const indextype \mbox{\hyperlink{fastpam_8h_a05b93569fb16e02d8be2f7ed8f987404}{MAX\+\_\+\+MEDOIDS}} =std\+::numeric\+\_\+limits$<$indextype$>$\+::max()-\/1
+\item 
+const indextype \mbox{\hyperlink{fastpam_8h_a5479336c7320cd7037a51392e736fcb1}{NO\+\_\+\+CLUSTER}} =\mbox{\hyperlink{fastpam_8h_a05b93569fb16e02d8be2f7ed8f987404}{MAX\+\_\+\+MEDOIDS}}
+\end{DoxyCompactItemize}
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+const unsigned char \mbox{\hyperlink{fastpam_8h_adc1c075c26e923896f17e4de593d04b8}{INIT\+\_\+\+METHOD\+\_\+\+PREVIOUS}} =0
+\item 
+const unsigned char \mbox{\hyperlink{fastpam_8h_a7ec24aaeb81908b23fe8a0ff0f111009}{INIT\+\_\+\+METHOD\+\_\+\+BUILD}} =1
+\item 
+const unsigned char \mbox{\hyperlink{fastpam_8h_a8c1d9c65ad942a5eb6faba550cbea952}{INIT\+\_\+\+METHOD\+\_\+\+LAB}} =2
+\item 
+const unsigned char \mbox{\hyperlink{fastpam_8h_a04677ef61fda1b00568b187f8ec47fd4}{NUM\+\_\+\+INIT\+\_\+\+METHODS}} =3
+\end{DoxyCompactItemize}
+
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+const unsigned char \mbox{\hyperlink{fastpam_8h_afc320fe5323fe388d544b92f668389ba}{OPT\+\_\+\+METHOD\+\_\+\+FASTPAM1}} =0
+\item 
+const unsigned char \mbox{\hyperlink{fastpam_8h_adebbe9db4b557075a9ebb9b888bc62bb}{OPT\+\_\+\+METHOD\+\_\+\+FASTPAMBSIL}} =1
+\item 
+const unsigned char \mbox{\hyperlink{fastpam_8h_a4f00c39166c7c645c1d2b9cae6437e78}{NUM\+\_\+\+OPT\+\_\+\+METHODS}} =2
+\end{DoxyCompactItemize}
+
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{fastpam_8h_a36b1b09b4ae10656d186f90ab767c450}\label{fastpam_8h_a36b1b09b4ae10656d186f90ab767c450}} 
+\index{fastpam.h@{fastpam.h}!MAXD@{MAXD}}
+\index{MAXD@{MAXD}!fastpam.h@{fastpam.h}}
+\doxysubsubsection{\texorpdfstring{MAXD}{MAXD}}
+{\footnotesize\ttfamily \#define MAXD~std\+::numeric\+\_\+limits$<$disttype$>$\+::max()}
+
+The possible minimum and maximum values the dissimilarity can take. To initialize before loops. \mbox{\Hypertarget{fastpam_8h_a3ab5ff0e9c7934e79358382686b40c2e}\label{fastpam_8h_a3ab5ff0e9c7934e79358382686b40c2e}} 
+\index{fastpam.h@{fastpam.h}!MIND@{MIND}}
+\index{MIND@{MIND}!fastpam.h@{fastpam.h}}
+\doxysubsubsection{\texorpdfstring{MIND}{MIND}}
+{\footnotesize\ttfamily \#define MIND~std\+::numeric\+\_\+limits$<$disttype$>$\+::min()}
+
+The possible minimum and maximum values the dissimilarity can take. To initialize before loops. 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{fastpam_8h_a7ec24aaeb81908b23fe8a0ff0f111009}\label{fastpam_8h_a7ec24aaeb81908b23fe8a0ff0f111009}} 
+\index{fastpam.h@{fastpam.h}!INIT\_METHOD\_BUILD@{INIT\_METHOD\_BUILD}}
+\index{INIT\_METHOD\_BUILD@{INIT\_METHOD\_BUILD}!fastpam.h@{fastpam.h}}
+\doxysubsubsection{\texorpdfstring{INIT\_METHOD\_BUILD}{INIT\_METHOD\_BUILD}}
+{\footnotesize\ttfamily const unsigned char INIT\+\_\+\+METHOD\+\_\+\+BUILD =1}
+
+The values of this constants is arbitrary, just a mark to distinguish it as a different initalization method~\newline
+If you add other initialization method, do it at the end and increase the NUM\+\_\+\+INIT\+\_\+\+METHODS constant. \mbox{\Hypertarget{fastpam_8h_a8c1d9c65ad942a5eb6faba550cbea952}\label{fastpam_8h_a8c1d9c65ad942a5eb6faba550cbea952}} 
+\index{fastpam.h@{fastpam.h}!INIT\_METHOD\_LAB@{INIT\_METHOD\_LAB}}
+\index{INIT\_METHOD\_LAB@{INIT\_METHOD\_LAB}!fastpam.h@{fastpam.h}}
+\doxysubsubsection{\texorpdfstring{INIT\_METHOD\_LAB}{INIT\_METHOD\_LAB}}
+{\footnotesize\ttfamily const unsigned char INIT\+\_\+\+METHOD\+\_\+\+LAB =2}
+
+The values of this constants is arbitrary, just a mark to distinguish it as a different initalization method~\newline
+If you add other initialization method, do it at the end and increase the NUM\+\_\+\+INIT\+\_\+\+METHODS constant. \mbox{\Hypertarget{fastpam_8h_ac9abe5c8dcf349d730ecce5c1f3d2f8b}\label{fastpam_8h_ac9abe5c8dcf349d730ecce5c1f3d2f8b}} 
+\index{fastpam.h@{fastpam.h}!init\_method\_names@{init\_method\_names}}
+\index{init\_method\_names@{init\_method\_names}!fastpam.h@{fastpam.h}}
+\doxysubsubsection{\texorpdfstring{init\_method\_names}{init\_method\_names}}
+{\footnotesize\ttfamily const std\+::string init\+\_\+method\+\_\+names\mbox{[}\mbox{\hyperlink{fastpam_8h_a04677ef61fda1b00568b187f8ec47fd4}{NUM\+\_\+\+INIT\+\_\+\+METHODS}}\mbox{]} =\{\char`\"{}PREV\char`\"{},\char`\"{}BUILD\char`\"{},\char`\"{}LAB\char`\"{}\}}
+
+Names of the initialization methods. Their positions in the array must coincide with its constant. \mbox{\Hypertarget{fastpam_8h_adc1c075c26e923896f17e4de593d04b8}\label{fastpam_8h_adc1c075c26e923896f17e4de593d04b8}} 
+\index{fastpam.h@{fastpam.h}!INIT\_METHOD\_PREVIOUS@{INIT\_METHOD\_PREVIOUS}}
+\index{INIT\_METHOD\_PREVIOUS@{INIT\_METHOD\_PREVIOUS}!fastpam.h@{fastpam.h}}
+\doxysubsubsection{\texorpdfstring{INIT\_METHOD\_PREVIOUS}{INIT\_METHOD\_PREVIOUS}}
+{\footnotesize\ttfamily const unsigned char INIT\+\_\+\+METHOD\+\_\+\+PREVIOUS =0}
+
+The values of this constants is arbitrary, just a mark to distinguish it as a different initalization method~\newline
+If you add other initialization method, do it at the end and increase the NUM\+\_\+\+INIT\+\_\+\+METHODS constant. \mbox{\Hypertarget{fastpam_8h_a58c68067aa9bf4b23ef5cdbdd69a7c19}\label{fastpam_8h_a58c68067aa9bf4b23ef5cdbdd69a7c19}} 
+\index{fastpam.h@{fastpam.h}!MAX\_ITER@{MAX\_ITER}}
+\index{MAX\_ITER@{MAX\_ITER}!fastpam.h@{fastpam.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_ITER}{MAX\_ITER}}
+{\footnotesize\ttfamily const unsigned int MAX\+\_\+\+ITER =1001}
+
+The maximum number of iterations we will allow \mbox{\Hypertarget{fastpam_8h_a05b93569fb16e02d8be2f7ed8f987404}\label{fastpam_8h_a05b93569fb16e02d8be2f7ed8f987404}} 
+\index{fastpam.h@{fastpam.h}!MAX\_MEDOIDS@{MAX\_MEDOIDS}}
+\index{MAX\_MEDOIDS@{MAX\_MEDOIDS}!fastpam.h@{fastpam.h}}
+\doxysubsubsection{\texorpdfstring{MAX\_MEDOIDS}{MAX\_MEDOIDS}}
+{\footnotesize\ttfamily const indextype MAX\+\_\+\+MEDOIDS =std\+::numeric\+\_\+limits$<$indextype$>$\+::max()-\/1}
+
+The maximum number of medoids we allow. \mbox{\Hypertarget{fastpam_8h_a5479336c7320cd7037a51392e736fcb1}\label{fastpam_8h_a5479336c7320cd7037a51392e736fcb1}} 
+\index{fastpam.h@{fastpam.h}!NO\_CLUSTER@{NO\_CLUSTER}}
+\index{NO\_CLUSTER@{NO\_CLUSTER}!fastpam.h@{fastpam.h}}
+\doxysubsubsection{\texorpdfstring{NO\_CLUSTER}{NO\_CLUSTER}}
+{\footnotesize\ttfamily const indextype NO\+\_\+\+CLUSTER =\mbox{\hyperlink{fastpam_8h_a05b93569fb16e02d8be2f7ed8f987404}{MAX\+\_\+\+MEDOIDS}}}
+
+A convenience constant to indicate a point is not currently assigned to any medoid \mbox{\Hypertarget{fastpam_8h_a04677ef61fda1b00568b187f8ec47fd4}\label{fastpam_8h_a04677ef61fda1b00568b187f8ec47fd4}} 
+\index{fastpam.h@{fastpam.h}!NUM\_INIT\_METHODS@{NUM\_INIT\_METHODS}}
+\index{NUM\_INIT\_METHODS@{NUM\_INIT\_METHODS}!fastpam.h@{fastpam.h}}
+\doxysubsubsection{\texorpdfstring{NUM\_INIT\_METHODS}{NUM\_INIT\_METHODS}}
+{\footnotesize\ttfamily const unsigned char NUM\+\_\+\+INIT\+\_\+\+METHODS =3}
+
+The values of this constants is arbitrary, just a mark to distinguish it as a different initalization method~\newline
+If you add other initialization method, do it at the end and increase the NUM\+\_\+\+INIT\+\_\+\+METHODS constant. \mbox{\Hypertarget{fastpam_8h_a4f00c39166c7c645c1d2b9cae6437e78}\label{fastpam_8h_a4f00c39166c7c645c1d2b9cae6437e78}} 
+\index{fastpam.h@{fastpam.h}!NUM\_OPT\_METHODS@{NUM\_OPT\_METHODS}}
+\index{NUM\_OPT\_METHODS@{NUM\_OPT\_METHODS}!fastpam.h@{fastpam.h}}
+\doxysubsubsection{\texorpdfstring{NUM\_OPT\_METHODS}{NUM\_OPT\_METHODS}}
+{\footnotesize\ttfamily const unsigned char NUM\+\_\+\+OPT\+\_\+\+METHODS =2}
+
+Arbitrary constant, just a mark to distinguish the different algorithms for the optimizacion phase \mbox{\Hypertarget{fastpam_8h_afc320fe5323fe388d544b92f668389ba}\label{fastpam_8h_afc320fe5323fe388d544b92f668389ba}} 
+\index{fastpam.h@{fastpam.h}!OPT\_METHOD\_FASTPAM1@{OPT\_METHOD\_FASTPAM1}}
+\index{OPT\_METHOD\_FASTPAM1@{OPT\_METHOD\_FASTPAM1}!fastpam.h@{fastpam.h}}
+\doxysubsubsection{\texorpdfstring{OPT\_METHOD\_FASTPAM1}{OPT\_METHOD\_FASTPAM1}}
+{\footnotesize\ttfamily const unsigned char OPT\+\_\+\+METHOD\+\_\+\+FASTPAM1 =0}
+
+Arbitrary constant, just a mark to distinguish the different algorithms for the optimizacion phase \mbox{\Hypertarget{fastpam_8h_adebbe9db4b557075a9ebb9b888bc62bb}\label{fastpam_8h_adebbe9db4b557075a9ebb9b888bc62bb}} 
+\index{fastpam.h@{fastpam.h}!OPT\_METHOD\_FASTPAMBSIL@{OPT\_METHOD\_FASTPAMBSIL}}
+\index{OPT\_METHOD\_FASTPAMBSIL@{OPT\_METHOD\_FASTPAMBSIL}!fastpam.h@{fastpam.h}}
+\doxysubsubsection{\texorpdfstring{OPT\_METHOD\_FASTPAMBSIL}{OPT\_METHOD\_FASTPAMBSIL}}
+{\footnotesize\ttfamily const unsigned char OPT\+\_\+\+METHOD\+\_\+\+FASTPAMBSIL =1}
+
+Arbitrary constant, just a mark to distinguish the different algorithms for the optimizacion phase \mbox{\Hypertarget{fastpam_8h_a51effe5e4aa6f0b41c14312a7ac62c6f}\label{fastpam_8h_a51effe5e4aa6f0b41c14312a7ac62c6f}} 
+\index{fastpam.h@{fastpam.h}!opt\_method\_names@{opt\_method\_names}}
+\index{opt\_method\_names@{opt\_method\_names}!fastpam.h@{fastpam.h}}
+\doxysubsubsection{\texorpdfstring{opt\_method\_names}{opt\_method\_names}}
+{\footnotesize\ttfamily const std\+::string opt\+\_\+method\+\_\+names\mbox{[}\mbox{\hyperlink{fastpam_8h_a4f00c39166c7c645c1d2b9cae6437e78}{NUM\+\_\+\+OPT\+\_\+\+METHODS}}\mbox{]} =\{\char`\"{}FASTPAM1\char`\"{},\char`\"{}TWOBRANCH\char`\"{}\}}
+
+Names of the optimization methods. Their positions in the array must coincide with its constant. 
