@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>ppam: Main Page</title>
+<title>ppam: ppamlib: a library to implement the Partitioning Around Medoids (PAM) algorithm in parallel.</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,11 +62,27 @@ $(function() {
 </iframe>
 </div>
 
-<div class="header">
+<div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">ppam Documentation</div>  </div>
+<div class="title">ppamlib: a library to implement the Partitioning Around Medoids (PAM) algorithm in parallel. </div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><h1><a class="anchor" id="expl"></a>
+General explanation</h1>
+<p>This library uses the data in jmatrix format, a specific library of matrix manipulation that allows extremely big matrices (as long as the RAM of the machine allows).<br  />
+Apart from the PAM itself the library also implements in parallel the calculation of the distance/dissimilarity matrix (metrics L1 and L2 and Pearson dissimilarity) and the silhouette of the resulting clustering.<br  />
+<br  />
+It includes four example programs (see section Files below):<br  />
+<br  />
+<b>pardis</b>: Parallel calculation of distance/dissimilarity matrix from a jmatrix with data<br  />
+<b>parpam</b>: Parallel implementation of the Partitioning Around Medoids (PAM) algorithm from a distance matrix.<br  />
+<b>parsil</b>: Parallel calculation of the silhouette of each points after the clustering has been applied.<br  />
+<b>tdvalue</b>: Calculation of the value of the optimization function of the PAM algorithm for a given clusterization result.<br  />
+<br  />
+These library uses the library jmatlib (see <a href="https://github.com/JdMDE/jmatlib">https://github.com/JdMDE/jmatlib</a>) which therefore needs to be installed before compilation and use of ppamlib.<br  />
+<br  />
+The code of this library with interface modifications is also used inside the parallelpam R package (<a href="https://CRAN.R-project.org/package=parallelpam">https://CRAN.R-project.org/package=parallelpam</a>) and inside the scellpam package (<a href="https://CRAN.R-project.org/package=scellpam">https://CRAN.R-project.org/package=scellpam</a>) </p>
+</div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
