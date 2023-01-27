@@ -8,9 +8,12 @@ and the silhouette of the resulting clustering.
 
 It includes four test programs:
 
-pardis: Parallel calculation of distance/dissimilarity matrix from a jmatrix with data
+pardis: Parallel calculation of distance/dissimilarity matrix from a jmatrix with data.
+
 parpam: Parallel implementation of the Partitioning Around Medoids (PAM) algorithm from a distance matrix.
+
 parsil: Parallel calculation of the silhouette of each points after the clustering has been applied.
+
 tdvalue: Calculation of the value of the optimization function of the PAM algorithm for a given clusterization result.
 
 These library uses the library jmatlib (see https://github.com/JdMDE/jmatlib) which therefore needs to be
