@@ -1,0 +1,14 @@
+\hypertarget{index_expl}{}\doxysection{General explanation}\label{index_expl}
+This library uses the data in jmatrix format, a specific library of matrix manipulation that allows extremely big matrices (as long as the RAM of the machine allows).~\newline
+Apart from the PAM itself the library also implements in parallel the calculation of the distance/dissimilarity matrix (metrics L1 and L2 and Pearson dissimilarity) and the silhouette of the resulting clustering.~\newline
+~\newline
+It includes four example programs (see section Files below)\+:~\newline
+~\newline
+{\bfseries{pardis}}\+: Parallel calculation of distance/dissimilarity matrix from a jmatrix with data~\newline
+{\bfseries{parpam}}\+: Parallel implementation of the Partitioning Around Medoids (PAM) algorithm from a distance matrix.~\newline
+{\bfseries{parsil}}\+: Parallel calculation of the silhouette of each points after the clustering has been applied.~\newline
+{\bfseries{tdvalue}}\+: Calculation of the value of the optimization function of the PAM algorithm for a given clusterization result.~\newline
+~\newline
+These library uses the library jmatlib (see \href{https://github.com/JdMDE/jmatlib}{\texttt{ https\+://github.\+com/\+Jd\+MDE/jmatlib}}) which therefore needs to be installed before compilation and use of ppamlib.~\newline
+~\newline
+The code of this library with interface modifications is also used inside the parallelpam R package (\href{https://CRAN.R-project.org/package=parallelpam}{\texttt{ https\+://\+CRAN.\+R-\/project.\+org/package=parallelpam}}) and inside the scellpam package (\href{https://CRAN.R-project.org/package=scellpam}{\texttt{ https\+://\+CRAN.\+R-\/project.\+org/package=scellpam}}) 
