@@ -30,6 +30,9 @@ target_link_libraries(parsil ppam jmatrix)
 add_executable(tdvalue tdvalue.cpp)
 target_link_libraries(tdvalue ppam jmatrix)
 
+# add_executable(testsm testsm.cpp)
+# target_link_libraries(testsm ppam jmatrix)
+
 #If your app, links to an external lib -ie Boost
 #target_link_libraries( jmatrixlib ${Boost_LIBRARIES} )
 
@@ -42,3 +45,4 @@ install(TARGETS parsil DESTINATION bin)
 install(CODE "execute_process(COMMAND ${CMAKE_COMMAND} -E create_symlink ${CMAKE_INSTALL_PREFIX}/bin/parsil ${CMAKE_INSTALL_PREFIX}/bin/parsild)")
 install(TARGETS tdvalue DESTINATION bin)
 
+# install(TARGETS testsm DESTINATION bin)

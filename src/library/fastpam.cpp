@@ -167,6 +167,7 @@ FastPAM<disttype>::FastPAM(SymmetricMatrix<disttype> *Dm, indextype num_medoids,
  ismedoid.resize(num_obs);
  nearest.resize(num_obs);
  dnearest.resize(num_obs);
+ dsecond.resize(num_obs);
  
  for (indextype q=0; q<num_obs; q++)
  {
@@ -232,6 +233,7 @@ void FastPAM<disttype>::InitializeInternals()
      dnearest[q]=mindist;
      // and the TD function is updated adding up such distance.
      currentTD += mindist;
+     // second and dsecond are not initialized here; they will be when/if needed
  }  
 }
 
@@ -375,6 +377,7 @@ template void FastPAM<double>::InitFromPreviousSet(std::vector<indextype> initme
 
 
 /********************** BUILD (serial) ****************/
+/*
 template <typename disttype>
 void FastPAM<disttype>::BUILD()
 {
@@ -534,6 +537,156 @@ void FastPAM<disttype>::BUILD()
     
     if (DEB & DEBPP)
       std::cout << "Current TD: " << std::fixed << currentTD/float(num_obs) << "\n";
+}
+*/
+
+template <typename disttype>
+void FastPAM<disttype>::BUILD()
+{
+
+    if (DEB & DEBPP)
+    {
+        std::cout << "Starting BUILD initialization method, serial version\n";
+        //std::cout << "WARNING: all successive messages use R-numbering (from 1) for points and medoids. Substract 1 to get the internal C-numbers.\n";
+        std::cout << "Looking for medoid 0. ";
+        std::cout.flush();
+    }
+
+    DifftimeHelper tfmed;
+    tfmed.StartClock("\nTime to find first medoid: ");
+    // Find the first medoid: the point with minimal sum of distances to the rest.
+    disttype TD=MAXD;                             // L1
+    indextype initial_best=num_obs+1;             // L1
+    disttype TDj;
+    for (indextype xc=0;xc<num_obs;xc++)          // L2
+    {
+        TDj=(disttype)0;                          // L3
+        for (indextype x0=0;x0<num_obs;x0++)      // L4
+            TDj += D->Get(x0,xc);
+        if (TDj<TD)                               // L5
+        {
+            TD = TDj;                             // L6
+            initial_best = xc;                    // L6
+        }
+    }
+    if (initial_best>num_obs)
+    {
+        ParallelpamStop("No best medoid found. Unexpected error.\n");
+        return;
+    }
+
+    currentTD = TD;
+
+    medoids.push_back(initial_best);
+    for (indextype m=1; m<nmed; m++)
+     medoids.push_back(NO_CLUSTER);
+
+    tfmed.EndClock(true);
+
+
+    if (DEB & DEBPP)
+    {
+        std::cout << "Medoid 0 found. Point " << initial_best << ". TD=" << std::fixed << currentTD/float(num_obs) << "\n";
+        std::cout.flush();
+    }
+
+    // Initialize the arrays of assignments and closest dissimilarities...
+    // To start, all points are in the cluster of the first medoid, so distance to closest medoid (dlcmed) is distance to it.
+    for (indextype x0=0; x0<num_obs; x0++)                                                                 // L7
+    {
+        nearest[x0] = 0;   // The only medoid now is initial_best, at place 0 of medoids' vector
+        dnearest[x0] = D->Get(x0,initial_best);                                                            // L7
+    }
+
+    // The only medoid which is such now is signalled in the vector of marks. The rest of this vector was initialized to false at class construction.
+    ismedoid[initial_best]=true;
+
+    // Now, the rest of medoids
+    double DeltaTDst,DeltaTD,delta;
+    indextype xst;
+    for (indextype i=0; i<nmed-1; i++)                                         // L8
+    {
+
+     DeltaTDst = MAXD;                                                       // L9
+     xst = num_obs+1;
+
+     // For each point, it is a candidate to be a new medoid...
+     for (indextype xc=0; xc<num_obs; xc++)                                  // L10
+     {
+         // ...unless it is one of the already found medoids.
+         if ( !ismedoid[xc] )
+         {
+             DeltaTD = 0.0;                                                  // L11
+
+             // Now, let's look at each of the other points...
+             for (indextype x0=0; x0<num_obs; x0++)                           // L12
+             {
+              if ( x0!=xc && !ismedoid[x0])
+              {
+               delta = double(D->Get(x0,xc) - dnearest[x0]);                  // L13
+               if (delta<0.0)                                                 // L14
+                   DeltaTD += delta;                                          // L14
+              }
+             }
+
+             //  This is because the distance of the prospective medoid to its closest medoid must be diminished
+             // from TD, too, since the cand would be a medoid and the distance to its closest medoid (itself) will become 0.
+             // This was not counted before due to the condition (other!=cand) and was not in the original algorithm of the paper.
+             DeltaTD -= dnearest[xc];
+
+             if (DeltaTD < DeltaTDst)                                         // L15
+             {
+                 DeltaTDst = DeltaTD;                                         // L16
+                 xst = xc;                                                    // L16
+             }
+         }
+     }
+
+     TD = TD+DeltaTDst;                                                       // L17
+     medoids[i+1] = xst;                                                      // L17
+
+     ismedoid[xst]=true;
+
+     // Update assignments and closests dissimilarities
+     indextype num_updated=0;
+     disttype d;
+     for (indextype x0=0; x0<num_obs; x0++)                                   // L18
+     {
+         d = D->Get(x0,xst);
+
+         if (d<dnearest[x0])                                                  // L19
+         {
+          dnearest[x0]=d;
+          nearest[x0]=xst;
+          num_updated++;
+         }
+     }
+
+
+     // The medoid itself is of course in its own cluster, and its dissimilarity with the "closest" (ifself) is obviously 0
+     // This has been probably updated in the former loop, but ...
+     nearest[xst]=xst;
+     dnearest[xst]=disttype(0);
+     currentTD = TD;
+
+     if (DEB & DEBPP)
+     {
+         std::cout << "Medoid " << i+1 << " found. Point " << xst << ". " << num_updated << " reassigned points. TD=" << std::fixed << currentTD/float(num_obs) << "\n";
+         std::cout.flush();
+     }
+
+    }
+
+    if (DEB & DEBPP)
+    {
+      std::cout << "Sorted medoids: [ ";
+      for (indextype i=0;i<num_obs;i++)
+       if (ismedoid[i])
+        std::cout << i << " ";
+      std::cout << "]\n";
+      std::cout << "Current TD: " << std::fixed << currentTD/float(num_obs) << " (" << currentTD << ")\n";
+    }
+
 }
 
 template void FastPAM<float>::BUILD();
@@ -1845,8 +1998,8 @@ void FastPAM<disttype>::FillSecond()
   dsecond.push_back(MAXD);
  
  // The dnearest (distance to closest medoid) is already in the class data, since it is used in BUILD/LAB 
- // and also later in the algorithm. But the distance to second-closest medoid (dsecond) is to be used just here.
- // We only need distances. The concrete medoid which is second is not used later, so we don't search for neither store it 
+ // and also later in the algorithm. But the distance to second-closest medoid (dsecond) is to be used just here and in BUILD
+ // Here we only need distances. The concrete medoid which is second is not used later (but it is used in BUILD), so we don't search for neither store it
  
  disttype minseconddist,dd;
  for (indextype q=0; q<num_obs; q++)

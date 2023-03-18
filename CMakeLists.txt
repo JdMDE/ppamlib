@@ -5,6 +5,8 @@ include(CheckCXXCompilerFlag)
 #Let's build shared libs (*.so)
 OPTION (BUILD_SHARED_LIBS "Build shared libraries." ON)
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O1")
+
 #Detect compiler and act accordingly
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang" OR "${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
     option(CMAKE_CXX_VERBOSE "Verbose compilation output?" OFF)
